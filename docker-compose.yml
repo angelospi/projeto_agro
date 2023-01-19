@@ -1,0 +1,28 @@
+version: '1'
+
+services:
+  airflow:
+    image: airflow_image
+    environment:
+      - AIRFLOW__CELERY__BROKER_URL=redis://redis:6379/0
+      - AIRFLOW__CORE__EXECUTOR=CeleryExecutor
+      - AIRFLOW__CELERY__RESULT_BACKEND=db+postgresql://root:root@postgres:5432/airflow
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql://root:root@postgres:5432/airflow
+    ports:
+      - 8080:8080
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+    links:
+      - postgres
+
+  postgres:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER:root
+      - POSTGRES_PASSWORD:root
+      - POSTGRES_DB=airflow
+    volumes:
+      - /home/angelo/Documentos/Cursos/projeto_agro/airflow/data:/var/lib/postgresql/data
+    ports:
+      - 5430:5432
