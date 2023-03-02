@@ -8,7 +8,7 @@ pylint:
 	@pylint .
 
 up_containers:
-	sudo docker compose up
+	docker compose up
 
 build_container_airflow:
-	sudo docker build -t airflow_image .
+	docker build -t airflow_image .

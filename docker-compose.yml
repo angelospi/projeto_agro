@@ -26,3 +26,19 @@ services:
       - /home/angelo/Documentos/Cursos/projeto_agro/airflow/data:/var/lib/postgresql/data
     ports:
       - 5430:5432
+
+  scheduler:
+      image: airflow_image
+      command: [ "airflow", "scheduler" ]
+      environment:
+        - AIRFLOW_HOME=/opt/airflow
+        - AIRFLOW__CORE__LOAD_EXAMPLES=False
+        - AIRFLOW__CELERY__RESULT_BACKEND=db+postgresql://root:root@postgres:5432/airflow
+        - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql://root:root@postgres:5432/airflow
+      volumes:
+        - ./airflow/dags:/opt/airflow/dags
+        - ./airflow/logs:/opt/airflow/logs
+        - ./data:/opt/data
+        - ./scripts:/opt/scripts
+      links:
+        - postgres
