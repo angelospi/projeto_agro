@@ -1,0 +1,49 @@
+[2023-03-10T22:56:54.696+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: projeto_agro.extract_data manual__2023-03-10T22:56:51.592386+00:00 [queued]>
+[2023-03-10T22:56:54.707+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: projeto_agro.extract_data manual__2023-03-10T22:56:51.592386+00:00 [queued]>
+[2023-03-10T22:56:54.707+0000] {taskinstance.py:1279} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-10T22:56:54.707+0000] {taskinstance.py:1280} INFO - Starting attempt 1 of 1
+[2023-03-10T22:56:54.708+0000] {taskinstance.py:1281} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-10T22:56:54.724+0000] {taskinstance.py:1300} INFO - Executing <Task(PythonOperator): extract_data> on 2023-03-10 22:56:51.592386+00:00
+[2023-03-10T22:56:54.728+0000] {standard_task_runner.py:55} INFO - Started process 42 to run task
+[2023-03-10T22:56:54.731+0000] {standard_task_runner.py:82} INFO - Running: ['airflow', 'tasks', 'run', 'projeto_agro', 'extract_data', 'manual__2023-03-10T22:56:51.592386+00:00', '--job-id', '71', '--raw', '--subdir', 'DAGS_FOLDER/main.py', '--cfg-path', '/tmp/tmp1fcoy68d']
+[2023-03-10T22:56:54.732+0000] {standard_task_runner.py:83} INFO - Job 71: Subtask extract_data
+[2023-03-10T22:56:54.811+0000] {task_command.py:388} INFO - Running <TaskInstance: projeto_agro.extract_data manual__2023-03-10T22:56:51.592386+00:00 [running]> on host d86bb0b8e82f
+[2023-03-10T22:56:54.909+0000] {taskinstance.py:1507} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=airflow
+AIRFLOW_CTX_DAG_ID=projeto_agro
+AIRFLOW_CTX_TASK_ID=extract_data
+AIRFLOW_CTX_EXECUTION_DATE=2023-03-10T22:56:51.592386+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=manual__2023-03-10T22:56:51.592386+00:00
+[2023-03-10T22:58:11.831+0000] {logging_mixin.py:137} WARNING - /opt/airflow/dags/../../scripts/extract.py:27 DtypeWarning: Columns (2) have mixed types. Specify dtype option on import or set low_memory=False.
+[2023-03-10T22:58:18.861+0000] {taskinstance.py:1768} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/site-packages/airflow/operators/python.py", line 175, in execute
+    return_value = self.execute_callable()
+  File "/usr/local/lib/python3.9/site-packages/airflow/operators/python.py", line 192, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/main.py", line 17, in extract
+    extract.save_data_raw()
+  File "/opt/airflow/dags/../../scripts/extract.py", line 41, in save_data_raw
+    self.all_data_faostat.to_csv(f'../data/data_raw/all_data_faostat_{date_time_str}.csv')
+  File "/usr/local/lib/python3.9/site-packages/pandas/util/_decorators.py", line 211, in wrapper
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.9/site-packages/pandas/core/generic.py", line 3720, in to_csv
+    return DataFrameRenderer(formatter).to_csv(
+  File "/usr/local/lib/python3.9/site-packages/pandas/util/_decorators.py", line 211, in wrapper
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.9/site-packages/pandas/io/formats/format.py", line 1189, in to_csv
+    csv_formatter.save()
+  File "/usr/local/lib/python3.9/site-packages/pandas/io/formats/csvs.py", line 241, in save
+    with get_handle(
+  File "/usr/local/lib/python3.9/site-packages/pandas/io/common.py", line 734, in get_handle
+    check_parent_directory(str(handle))
+  File "/usr/local/lib/python3.9/site-packages/pandas/io/common.py", line 597, in check_parent_directory
+    raise OSError(rf"Cannot save file into a non-existent directory: '{parent}'")
+OSError: Cannot save file into a non-existent directory: '../data/data_raw'
+[2023-03-10T22:58:19.016+0000] {taskinstance.py:1318} INFO - Marking task as FAILED. dag_id=projeto_agro, task_id=extract_data, execution_date=20230310T225651, start_date=20230310T225654, end_date=20230310T225819
+[2023-03-10T22:58:19.094+0000] {standard_task_runner.py:100} ERROR - Failed to execute job 71 for task extract_data (Cannot save file into a non-existent directory: '../data/data_raw'; 42)
+[2023-03-10T22:58:19.209+0000] {local_task_job.py:208} INFO - Task exited with return code 1
+[2023-03-10T22:58:19.288+0000] {taskinstance.py:2578} INFO - 0 downstream tasks scheduled from follow-on schedule check

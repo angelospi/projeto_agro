@@ -13,6 +13,10 @@ pylint = "^2.15.10"
 isort = "^5.11.4"
 kubernetes = "^25.3.0"
 sqlalchemy = "^1.4.46"
+httpx = "^0.23.3"
+jupyter = "^1.0.0"
+notebook = "^6.5.2"
+datetime = "^5.0"
 
 
 [build-system]

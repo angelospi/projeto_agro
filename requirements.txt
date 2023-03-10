@@ -18,3 +18,5 @@ apache-airflow-providers-http==4.1.0
 apache-airflow-providers-imap==3.1.0
 apache-airflow-providers-sqlite==3.3.1
 psycopg2==2.8.4
+httpx==0.23.3
+DateTime==5.0

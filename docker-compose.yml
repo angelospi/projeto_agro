@@ -8,11 +8,14 @@ services:
       - AIRFLOW__CORE__EXECUTOR=CeleryExecutor
       - AIRFLOW__CELERY__RESULT_BACKEND=db+postgresql://root:root@postgres:5432/airflow
       - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql://root:root@postgres:5432/airflow
+      - AIRFLOW__LOGGING__BASE_LOG_FOLDER=/opt/airflow/logs
     ports:
       - 8080:8080
     volumes:
       - ./airflow/dags:/opt/airflow/dags
       - ./airflow/logs:/opt/airflow/logs
+      - ./data:/opt/data
+      - ./scripts:/opt/scripts
     links:
       - postgres
 
@@ -23,7 +26,7 @@ services:
       - POSTGRES_PASSWORD:root
       - POSTGRES_DB=airflow
     volumes:
-      - /home/angelo/Documentos/Cursos/projeto_agro/airflow/data:/var/lib/postgresql/data
+      - /home/angelo/Documentos/Cursos/projeto_agro/airflow/metadata_airflow:/var/lib/postgresql/data
     ports:
       - 5430:5432
 
@@ -35,6 +38,7 @@ services:
         - AIRFLOW__CORE__LOAD_EXAMPLES=False
         - AIRFLOW__CELERY__RESULT_BACKEND=db+postgresql://root:root@postgres:5432/airflow
         - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql://root:root@postgres:5432/airflow
+        - AIRFLOW__LOGGING__BASE_LOG_FOLDER=/opt/airflow/logs
       volumes:
         - ./airflow/dags:/opt/airflow/dags
         - ./airflow/logs:/opt/airflow/logs
