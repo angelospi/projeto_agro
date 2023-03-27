@@ -13,9 +13,9 @@ dag = DAG(dag_id="projeto_agro", start_date=datetime(2023, 1, 13))
 
 def extract():
     extract = Extract()
-    extract.change_columns_year()
     extract.save_data_raw()
 
 extract = PythonOperator(task_id="extract_data", python_callable=extract, dag=dag)
+
 
 extract

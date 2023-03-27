@@ -20,3 +20,7 @@ apache-airflow-providers-sqlite==3.3.1
 psycopg2==2.8.4
 httpx==0.23.3
 DateTime==5.0
+pandas==1.5.2
+pyarrow==6.0.0
+fsspec==2023.3.0
+gcsfs==2023.3.0
