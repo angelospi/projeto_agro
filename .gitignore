@@ -2,3 +2,4 @@ credentials
 .idea/
 .ipynb_checkpoints
 airflow/metadata_airflow
+airflow/logs

@@ -17,7 +17,7 @@
 - Element Code: Código do elemento
 - Element: Elemento
 - Item Code (CPC): Código do item
-- Item: Nome do item 
+- Item: Nome do item
 - Year Code: Código do ano
 - Year: Ano
 - Unit: Unidade de medida
@@ -28,7 +28,7 @@
 ### FONTE: ONU
 -  Region/Country/Area: Código da região ou país
 - Country: Nome do país ou região
-- Year: Ano 
+- Year: Ano
 - Series: Informação do valor
 - Value: Valor
 - Footnotes: Observações
@@ -43,7 +43,7 @@ Para realizar a modelagem de dados foi utilizado o aplicativo DbSchema. O banco 
 
 ## Arquitetura do projeto
 A fim de viabilizar o desenvolvimento do projeto, fez-se necessário instanciar os recursos que foram utilizados do GCP. Para isso,
-utilizou-se a ferramenta *Terraform* que provisiona os recursos via código facilitando na manutenção e implementação 
+utilizou-se a ferramenta *Terraform* que provisiona os recursos via código facilitando na manutenção e implementação
 da infraestrutura.
 
 A partir deste momento, inicia-se a criação do ETL. Dessa forma, o dado foi extraído das APIs disponibilizadas
