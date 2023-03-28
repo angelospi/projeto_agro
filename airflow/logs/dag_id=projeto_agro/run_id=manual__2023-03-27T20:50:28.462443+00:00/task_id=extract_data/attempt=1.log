@@ -1,0 +1,40 @@
+[2023-03-27T20:50:32.681+0000] {taskinstance.py:1087} INFO - Dependencies all met for <TaskInstance: projeto_agro.extract_data manual__2023-03-27T20:50:28.462443+00:00 [queued]>
+[2023-03-27T20:50:32.699+0000] {taskinstance.py:1087} INFO - Dependencies all met for <TaskInstance: projeto_agro.extract_data manual__2023-03-27T20:50:28.462443+00:00 [queued]>
+[2023-03-27T20:50:32.699+0000] {taskinstance.py:1283} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-27T20:50:32.699+0000] {taskinstance.py:1284} INFO - Starting attempt 1 of 1
+[2023-03-27T20:50:32.699+0000] {taskinstance.py:1285} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-27T20:50:32.725+0000] {taskinstance.py:1304} INFO - Executing <Task(PythonOperator): extract_data> on 2023-03-27 20:50:28.462443+00:00
+[2023-03-27T20:50:32.733+0000] {standard_task_runner.py:55} INFO - Started process 168 to run task
+[2023-03-27T20:50:32.741+0000] {standard_task_runner.py:82} INFO - Running: ['airflow', 'tasks', 'run', 'projeto_agro', 'extract_data', 'manual__2023-03-27T20:50:28.462443+00:00', '--job-id', '139', '--raw', '--subdir', 'DAGS_FOLDER/main.py', '--cfg-path', '/tmp/tmpvt_1f_vs']
+[2023-03-27T20:50:32.744+0000] {standard_task_runner.py:83} INFO - Job 139: Subtask extract_data
+[2023-03-27T20:50:32.865+0000] {task_command.py:389} INFO - Running <TaskInstance: projeto_agro.extract_data manual__2023-03-27T20:50:28.462443+00:00 [running]> on host 48ec747c45e3
+[2023-03-27T20:50:32.977+0000] {taskinstance.py:1511} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=airflow
+AIRFLOW_CTX_DAG_ID=projeto_agro
+AIRFLOW_CTX_TASK_ID=extract_data
+AIRFLOW_CTX_EXECUTION_DATE=2023-03-27T20:50:28.462443+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=manual__2023-03-27T20:50:28.462443+00:00
+[2023-03-27T20:51:11.192+0000] {taskinstance.py:1772} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/site-packages/airflow/operators/python.py", line 175, in execute
+    return_value = self.execute_callable()
+  File "/usr/local/lib/python3.9/site-packages/airflow/operators/python.py", line 192, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/main.py", line 16, in extract
+    extract = Extract()
+  File "/opt/airflow/dags/../../scripts/extract.py", line 14, in __init__
+    self._get_info_countries_data()
+  File "/opt/airflow/dags/../../scripts/extract.py", line 31, in _get_info_countries_data
+    self.infos_countries = pd.read_csv(zip_file.open('WPP2022_Demographic_Indicators_Medium.csv'))
+  File "/usr/local/lib/python3.9/zipfile.py", line 1511, in open
+    zinfo = self.getinfo(name)
+  File "/usr/local/lib/python3.9/zipfile.py", line 1438, in getinfo
+    raise KeyError(
+KeyError: "There is no item named 'WPP2022_Demographic_Indicators_Medium.csv' in the archive"
+[2023-03-27T20:51:11.203+0000] {taskinstance.py:1322} INFO - Marking task as FAILED. dag_id=projeto_agro, task_id=extract_data, execution_date=20230327T205028, start_date=20230327T205032, end_date=20230327T205111
+[2023-03-27T20:51:11.216+0000] {standard_task_runner.py:100} ERROR - Failed to execute job 139 for task extract_data ("There is no item named 'WPP2022_Demographic_Indicators_Medium.csv' in the archive"; 168)
+[2023-03-27T20:51:11.240+0000] {local_task_job.py:159} INFO - Task exited with return code 1
+[2023-03-27T20:51:11.264+0000] {taskinstance.py:2582} INFO - 0 downstream tasks scheduled from follow-on schedule check

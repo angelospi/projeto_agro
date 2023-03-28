@@ -1,0 +1,59 @@
+[2023-03-27T20:34:56.912+0000] {taskinstance.py:1087} INFO - Dependencies all met for <TaskInstance: projeto_agro.extract_data manual__2023-03-27T20:34:52.688109+00:00 [queued]>
+[2023-03-27T20:34:56.924+0000] {taskinstance.py:1087} INFO - Dependencies all met for <TaskInstance: projeto_agro.extract_data manual__2023-03-27T20:34:52.688109+00:00 [queued]>
+[2023-03-27T20:34:56.925+0000] {taskinstance.py:1283} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-27T20:34:56.925+0000] {taskinstance.py:1284} INFO - Starting attempt 1 of 1
+[2023-03-27T20:34:56.925+0000] {taskinstance.py:1285} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-27T20:34:56.944+0000] {taskinstance.py:1304} INFO - Executing <Task(PythonOperator): extract_data> on 2023-03-27 20:34:52.688109+00:00
+[2023-03-27T20:34:56.948+0000] {standard_task_runner.py:55} INFO - Started process 29 to run task
+[2023-03-27T20:34:56.951+0000] {standard_task_runner.py:82} INFO - Running: ['airflow', 'tasks', 'run', 'projeto_agro', 'extract_data', 'manual__2023-03-27T20:34:52.688109+00:00', '--job-id', '136', '--raw', '--subdir', 'DAGS_FOLDER/main.py', '--cfg-path', '/tmp/tmp41zwbmbp']
+[2023-03-27T20:34:56.952+0000] {standard_task_runner.py:83} INFO - Job 136: Subtask extract_data
+[2023-03-27T20:34:57.037+0000] {task_command.py:389} INFO - Running <TaskInstance: projeto_agro.extract_data manual__2023-03-27T20:34:52.688109+00:00 [running]> on host 48ec747c45e3
+[2023-03-27T20:34:57.123+0000] {taskinstance.py:1511} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=airflow
+AIRFLOW_CTX_DAG_ID=projeto_agro
+AIRFLOW_CTX_TASK_ID=extract_data
+AIRFLOW_CTX_EXECUTION_DATE=2023-03-27T20:34:52.688109+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=manual__2023-03-27T20:34:52.688109+00:00
+[2023-03-27T20:35:11.948+0000] {logging_mixin.py:137} WARNING - /opt/airflow/dags/../../scripts/extract.py:31 DtypeWarning: Columns (2) have mixed types. Specify dtype option on import or set low_memory=False.
+[2023-03-27T20:35:17.332+0000] {taskinstance.py:1772} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/site-packages/airflow/operators/python.py", line 175, in execute
+    return_value = self.execute_callable()
+  File "/usr/local/lib/python3.9/site-packages/airflow/operators/python.py", line 192, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/main.py", line 17, in extract
+    dict_files_name=extract.save_data_raw()
+  File "/opt/airflow/dags/../../scripts/extract.py", line 46, in save_data_raw
+    self.infos_countries.to_parquet('gs://data_raw_area_project_agro/' + dict_files_name['path_file_countries'], storage_options={'token':'/opt/credentials/zoomcamp-374100-a34bc7914122.json'})
+  File "/usr/local/lib/python3.9/site-packages/pandas/util/_decorators.py", line 211, in wrapper
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.9/site-packages/pandas/core/frame.py", line 2975, in to_parquet
+    return to_parquet(
+  File "/usr/local/lib/python3.9/site-packages/pandas/io/parquet.py", line 430, in to_parquet
+    impl.write(
+  File "/usr/local/lib/python3.9/site-packages/pandas/io/parquet.py", line 174, in write
+    table = self.api.Table.from_pandas(df, **from_pandas_kwargs)
+  File "pyarrow/table.pxi", line 1650, in pyarrow.lib.Table.from_pandas
+  File "/usr/local/lib/python3.9/site-packages/pyarrow/pandas_compat.py", line 607, in dataframe_to_arrays
+    arrays[i] = maybe_fut.result()
+  File "/usr/local/lib/python3.9/concurrent/futures/_base.py", line 439, in result
+    return self.__get_result()
+  File "/usr/local/lib/python3.9/concurrent/futures/_base.py", line 391, in __get_result
+    raise self._exception
+  File "/usr/local/lib/python3.9/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.9/site-packages/pyarrow/pandas_compat.py", line 581, in convert_column
+    raise e
+  File "/usr/local/lib/python3.9/site-packages/pyarrow/pandas_compat.py", line 575, in convert_column
+    result = pa.array(col, type=type_, from_pandas=True, safe=safe)
+  File "pyarrow/array.pxi", line 311, in pyarrow.lib.array
+  File "pyarrow/array.pxi", line 83, in pyarrow.lib._ndarray_to_array
+  File "pyarrow/error.pxi", line 122, in pyarrow.lib.check_status
+pyarrow.lib.ArrowTypeError: ("Expected bytes, got a 'float' object", 'Conversion failed for column Notes with type object')
+[2023-03-27T20:35:17.345+0000] {taskinstance.py:1322} INFO - Marking task as FAILED. dag_id=projeto_agro, task_id=extract_data, execution_date=20230327T203452, start_date=20230327T203456, end_date=20230327T203517
+[2023-03-27T20:35:17.358+0000] {standard_task_runner.py:100} ERROR - Failed to execute job 136 for task extract_data (("Expected bytes, got a 'float' object", 'Conversion failed for column Notes with type object'); 29)
+[2023-03-27T20:35:17.402+0000] {local_task_job.py:159} INFO - Task exited with return code 1
+[2023-03-27T20:35:17.426+0000] {taskinstance.py:2582} INFO - 0 downstream tasks scheduled from follow-on schedule check

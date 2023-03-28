@@ -1,0 +1,26 @@
+[2023-03-27T20:08:20.080+0000] {taskinstance.py:1087} INFO - Dependencies all met for <TaskInstance: projeto_agro.extract_data manual__2023-03-27T20:08:16.413723+00:00 [queued]>
+[2023-03-27T20:08:20.093+0000] {taskinstance.py:1087} INFO - Dependencies all met for <TaskInstance: projeto_agro.extract_data manual__2023-03-27T20:08:16.413723+00:00 [queued]>
+[2023-03-27T20:08:20.093+0000] {taskinstance.py:1283} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-27T20:08:20.093+0000] {taskinstance.py:1284} INFO - Starting attempt 1 of 1
+[2023-03-27T20:08:20.093+0000] {taskinstance.py:1285} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-27T20:08:20.108+0000] {taskinstance.py:1304} INFO - Executing <Task(PythonOperator): extract_data> on 2023-03-27 20:08:16.413723+00:00
+[2023-03-27T20:08:20.112+0000] {standard_task_runner.py:55} INFO - Started process 287 to run task
+[2023-03-27T20:08:20.115+0000] {standard_task_runner.py:82} INFO - Running: ['airflow', 'tasks', 'run', 'projeto_agro', 'extract_data', 'manual__2023-03-27T20:08:16.413723+00:00', '--job-id', '99', '--raw', '--subdir', 'DAGS_FOLDER/main.py', '--cfg-path', '/tmp/tmpoj1t0vnv']
+[2023-03-27T20:08:20.116+0000] {standard_task_runner.py:83} INFO - Job 99: Subtask extract_data
+[2023-03-27T20:08:20.193+0000] {task_command.py:389} INFO - Running <TaskInstance: projeto_agro.extract_data manual__2023-03-27T20:08:16.413723+00:00 [running]> on host 32181d1fdb83
+[2023-03-27T20:08:20.308+0000] {taskinstance.py:1511} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=airflow
+AIRFLOW_CTX_DAG_ID=projeto_agro
+AIRFLOW_CTX_TASK_ID=extract_data
+AIRFLOW_CTX_EXECUTION_DATE=2023-03-27T20:08:16.413723+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=manual__2023-03-27T20:08:16.413723+00:00
+[2023-03-27T20:08:37.167+0000] {logging_mixin.py:137} WARNING - /opt/airflow/dags/../../scripts/extract.py:31 DtypeWarning: Columns (2) have mixed types. Specify dtype option on import or set low_memory=False.
+[2023-03-27T20:08:37.199+0000] {logging_mixin.py:137} INFO - {'path_file_faostat': '03-27-2023/faostat.parquet', 'path_file_countries': '03-27-2023/countries.parquet', 'path_file_flags': '03-27-2023/flags.parquet', 'path_file_area_codes': '03-27-2023/area_codes.parquet', 'path_file_item_codes': '03-27-2023/item_codes.parquet'}
+[2023-03-27T20:22:47.264+0000] {local_task_job.py:223} WARNING - State of this instance has been externally set to failed. Terminating instance.
+[2023-03-27T20:22:47.265+0000] {process_utils.py:129} INFO - Sending Signals.SIGTERM to group 287. PIDs of all processes in the group: [287]
+[2023-03-27T20:22:47.265+0000] {process_utils.py:84} INFO - Sending the signal Signals.SIGTERM to group 287
+[2023-03-27T20:22:47.265+0000] {taskinstance.py:1483} ERROR - Received SIGTERM. Terminating subprocesses.
+[2023-03-27T20:22:48.573+0000] {process_utils.py:79} INFO - Process psutil.Process(pid=287, status='terminated', exitcode=0, started='20:08:19') (287) terminated with exit code 0

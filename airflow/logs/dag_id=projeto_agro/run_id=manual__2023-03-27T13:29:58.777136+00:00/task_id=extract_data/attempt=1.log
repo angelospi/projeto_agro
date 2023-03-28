@@ -1,0 +1,94 @@
+[2023-03-27T13:30:01.929+0000] {taskinstance.py:1087} INFO - Dependencies all met for <TaskInstance: projeto_agro.extract_data manual__2023-03-27T13:29:58.777136+00:00 [queued]>
+[2023-03-27T13:30:01.939+0000] {taskinstance.py:1087} INFO - Dependencies all met for <TaskInstance: projeto_agro.extract_data manual__2023-03-27T13:29:58.777136+00:00 [queued]>
+[2023-03-27T13:30:01.939+0000] {taskinstance.py:1283} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-27T13:30:01.939+0000] {taskinstance.py:1284} INFO - Starting attempt 1 of 1
+[2023-03-27T13:30:01.939+0000] {taskinstance.py:1285} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-27T13:30:01.951+0000] {taskinstance.py:1304} INFO - Executing <Task(PythonOperator): extract_data> on 2023-03-27 13:29:58.777136+00:00
+[2023-03-27T13:30:01.956+0000] {standard_task_runner.py:55} INFO - Started process 51 to run task
+[2023-03-27T13:30:01.959+0000] {standard_task_runner.py:82} INFO - Running: ['airflow', 'tasks', 'run', 'projeto_agro', 'extract_data', 'manual__2023-03-27T13:29:58.777136+00:00', '--job-id', '94', '--raw', '--subdir', 'DAGS_FOLDER/main.py', '--cfg-path', '/tmp/tmpp16gyy_r']
+[2023-03-27T13:30:01.961+0000] {standard_task_runner.py:83} INFO - Job 94: Subtask extract_data
+[2023-03-27T13:30:02.030+0000] {task_command.py:389} INFO - Running <TaskInstance: projeto_agro.extract_data manual__2023-03-27T13:29:58.777136+00:00 [running]> on host de8151cd9b21
+[2023-03-27T13:30:02.193+0000] {taskinstance.py:1511} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=airflow
+AIRFLOW_CTX_DAG_ID=projeto_agro
+AIRFLOW_CTX_TASK_ID=extract_data
+AIRFLOW_CTX_EXECUTION_DATE=2023-03-27T13:29:58.777136+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=manual__2023-03-27T13:29:58.777136+00:00
+[2023-03-27T13:30:20.838+0000] {logging_mixin.py:137} WARNING - /opt/airflow/dags/../../scripts/extract.py:32 DtypeWarning: Columns (2) have mixed types. Specify dtype option on import or set low_memory=False.
+[2023-03-27T13:30:24.211+0000] {_metadata.py:99} WARNING - Compute Engine Metadata server unavailable on attempt 1 of 3. Reason: timed out
+[2023-03-27T13:30:24.271+0000] {_metadata.py:99} WARNING - Compute Engine Metadata server unavailable on attempt 2 of 3. Reason: [Errno 113] No route to host
+[2023-03-27T13:30:27.275+0000] {_metadata.py:99} WARNING - Compute Engine Metadata server unavailable on attempt 3 of 3. Reason: timed out
+[2023-03-27T13:30:27.276+0000] {_default.py:296} WARNING - Authentication failed using Compute Engine authentication due to unavailable metadata server.
+[2023-03-27T13:30:27.483+0000] {_metadata.py:154} WARNING - Compute Engine Metadata server unavailable on attempt 1 of 5. Reason: HTTPConnectionPool(host='metadata.google.internal', port=80): Max retries exceeded with url: /computeMetadata/v1/instance/service-accounts/default/?recursive=true (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f6d70664790>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+[2023-03-27T13:30:27.525+0000] {_metadata.py:154} WARNING - Compute Engine Metadata server unavailable on attempt 2 of 5. Reason: HTTPConnectionPool(host='metadata.google.internal', port=80): Max retries exceeded with url: /computeMetadata/v1/instance/service-accounts/default/?recursive=true (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f6d7064df40>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+[2023-03-27T13:30:27.570+0000] {_metadata.py:154} WARNING - Compute Engine Metadata server unavailable on attempt 3 of 5. Reason: HTTPConnectionPool(host='metadata.google.internal', port=80): Max retries exceeded with url: /computeMetadata/v1/instance/service-accounts/default/?recursive=true (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f6d706649d0>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+[2023-03-27T13:30:27.630+0000] {_metadata.py:154} WARNING - Compute Engine Metadata server unavailable on attempt 4 of 5. Reason: HTTPConnectionPool(host='metadata.google.internal', port=80): Max retries exceeded with url: /computeMetadata/v1/instance/service-accounts/default/?recursive=true (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f6d70664dc0>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+[2023-03-27T13:30:27.683+0000] {_metadata.py:154} WARNING - Compute Engine Metadata server unavailable on attempt 5 of 5. Reason: HTTPConnectionPool(host='metadata.google.internal', port=80): Max retries exceeded with url: /computeMetadata/v1/instance/service-accounts/default/?recursive=true (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f6d7067d280>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+[2023-03-27T13:30:28.697+0000] {retry.py:148} ERROR - _request non-retriable exception: Anonymous caller does not have storage.objects.create access to the Google Cloud Storage object. Permission 'storage.objects.create' denied on resource (or it may not exist)., 401
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/site-packages/gcsfs/retry.py", line 114, in retry_request
+    return await func(*args, **kwargs)
+  File "/usr/local/lib/python3.9/site-packages/gcsfs/core.py", line 411, in _request
+    validate_response(status, contents, path, args)
+  File "/usr/local/lib/python3.9/site-packages/gcsfs/retry.py", line 101, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Anonymous caller does not have storage.objects.create access to the Google Cloud Storage object. Permission 'storage.objects.create' denied on resource (or it may not exist)., 401
+[2023-03-27T13:30:28.705+0000] {taskinstance.py:1772} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/site-packages/airflow/operators/python.py", line 175, in execute
+    return_value = self.execute_callable()
+  File "/usr/local/lib/python3.9/site-packages/airflow/operators/python.py", line 192, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/main.py", line 16, in extract
+    extract.save_data_raw()
+  File "/opt/airflow/dags/../../scripts/extract.py", line 41, in save_data_raw
+    self.all_data_faostat.to_csv('gs://data_raw_area_project_agro/' + path_file_faostat)
+  File "/usr/local/lib/python3.9/site-packages/pandas/util/_decorators.py", line 211, in wrapper
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.9/site-packages/pandas/core/generic.py", line 3720, in to_csv
+    return DataFrameRenderer(formatter).to_csv(
+  File "/usr/local/lib/python3.9/site-packages/pandas/util/_decorators.py", line 211, in wrapper
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.9/site-packages/pandas/io/formats/format.py", line 1189, in to_csv
+    csv_formatter.save()
+  File "/usr/local/lib/python3.9/site-packages/pandas/io/formats/csvs.py", line 261, in save
+    self._save()
+  File "/usr/local/lib/python3.9/site-packages/pandas/io/formats/csvs.py", line 266, in _save
+    self._save_body()
+  File "/usr/local/lib/python3.9/site-packages/pandas/io/formats/csvs.py", line 304, in _save_body
+    self._save_chunk(start_i, end_i)
+  File "/usr/local/lib/python3.9/site-packages/pandas/io/formats/csvs.py", line 315, in _save_chunk
+    libwriters.write_csv_rows(
+  File "pandas/_libs/writers.pyx", line 55, in pandas._libs.writers.write_csv_rows
+  File "/usr/local/lib/python3.9/site-packages/fsspec/spec.py", line 1616, in write
+    self.flush()
+  File "/usr/local/lib/python3.9/site-packages/fsspec/spec.py", line 1652, in flush
+    self._initiate_upload()
+  File "/usr/local/lib/python3.9/site-packages/gcsfs/core.py", line 1592, in _initiate_upload
+    self.location = sync(
+  File "/usr/local/lib/python3.9/site-packages/fsspec/asyn.py", line 100, in sync
+    raise return_result
+  File "/usr/local/lib/python3.9/site-packages/fsspec/asyn.py", line 55, in _runner
+    result[0] = await coro
+  File "/usr/local/lib/python3.9/site-packages/gcsfs/core.py", line 1708, in initiate_upload
+    headers, _ = await fs._call(
+  File "/usr/local/lib/python3.9/site-packages/gcsfs/core.py", line 418, in _call
+    status, headers, info, contents = await self._request(
+  File "/usr/local/lib/python3.9/site-packages/decorator.py", line 221, in fun
+    return await caller(func, *(extras + args), **kw)
+  File "/usr/local/lib/python3.9/site-packages/gcsfs/retry.py", line 149, in retry_request
+    raise e
+  File "/usr/local/lib/python3.9/site-packages/gcsfs/retry.py", line 114, in retry_request
+    return await func(*args, **kwargs)
+  File "/usr/local/lib/python3.9/site-packages/gcsfs/core.py", line 411, in _request
+    validate_response(status, contents, path, args)
+  File "/usr/local/lib/python3.9/site-packages/gcsfs/retry.py", line 101, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Anonymous caller does not have storage.objects.create access to the Google Cloud Storage object. Permission 'storage.objects.create' denied on resource (or it may not exist)., 401
+[2023-03-27T13:30:28.728+0000] {taskinstance.py:1322} INFO - Marking task as FAILED. dag_id=projeto_agro, task_id=extract_data, execution_date=20230327T132958, start_date=20230327T133001, end_date=20230327T133028
+[2023-03-27T13:30:28.743+0000] {standard_task_runner.py:100} ERROR - Failed to execute job 94 for task extract_data (Anonymous caller does not have storage.objects.create access to the Google Cloud Storage object. Permission 'storage.objects.create' denied on resource (or it may not exist)., 401; 51)
+[2023-03-27T13:30:28.797+0000] {local_task_job.py:159} INFO - Task exited with return code 1
+[2023-03-27T13:30:28.816+0000] {taskinstance.py:2582} INFO - 0 downstream tasks scheduled from follow-on schedule check

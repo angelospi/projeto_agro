@@ -1,0 +1,34 @@
+[2023-03-28T00:20:39.045+0000] {taskinstance.py:1087} INFO - Dependencies all met for <TaskInstance: projeto_agro.transform_data manual__2023-03-28T00:19:27.936061+00:00 [queued]>
+[2023-03-28T00:20:39.055+0000] {taskinstance.py:1087} INFO - Dependencies all met for <TaskInstance: projeto_agro.transform_data manual__2023-03-28T00:19:27.936061+00:00 [queued]>
+[2023-03-28T00:20:39.056+0000] {taskinstance.py:1283} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-28T00:20:39.056+0000] {taskinstance.py:1284} INFO - Starting attempt 1 of 1
+[2023-03-28T00:20:39.056+0000] {taskinstance.py:1285} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-28T00:20:39.069+0000] {taskinstance.py:1304} INFO - Executing <Task(PythonOperator): transform_data> on 2023-03-28 00:19:27.936061+00:00
+[2023-03-28T00:20:39.073+0000] {standard_task_runner.py:55} INFO - Started process 1343 to run task
+[2023-03-28T00:20:39.075+0000] {standard_task_runner.py:82} INFO - Running: ['airflow', 'tasks', 'run', 'projeto_agro', 'transform_data', 'manual__2023-03-28T00:19:27.936061+00:00', '--job-id', '156', '--raw', '--subdir', 'DAGS_FOLDER/main.py', '--cfg-path', '/tmp/tmp7f6gt6ii']
+[2023-03-28T00:20:39.076+0000] {standard_task_runner.py:83} INFO - Job 156: Subtask transform_data
+[2023-03-28T00:20:39.140+0000] {task_command.py:389} INFO - Running <TaskInstance: projeto_agro.transform_data manual__2023-03-28T00:19:27.936061+00:00 [running]> on host 48ec747c45e3
+[2023-03-28T00:20:39.209+0000] {taskinstance.py:1511} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=airflow
+AIRFLOW_CTX_DAG_ID=projeto_agro
+AIRFLOW_CTX_TASK_ID=transform_data
+AIRFLOW_CTX_EXECUTION_DATE=2023-03-28T00:19:27.936061+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=manual__2023-03-28T00:19:27.936061+00:00
+[2023-03-28T00:21:05.576+0000] {taskinstance.py:1772} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/site-packages/airflow/operators/python.py", line 175, in execute
+    return_value = self.execute_callable()
+  File "/usr/local/lib/python3.9/site-packages/airflow/operators/python.py", line 192, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/main.py", line 30, in transform
+    transform.transform_columns()
+  File "/opt/airflow/dags/../../scripts/transform.py", line 64, in transform_columns
+    dataframe_years_flag['Area Code (M49)'].astype('str') + '_'
+NameError: name 'dataframe_years_flag' is not defined
+[2023-03-28T00:21:05.737+0000] {taskinstance.py:1322} INFO - Marking task as FAILED. dag_id=projeto_agro, task_id=transform_data, execution_date=20230328T001927, start_date=20230328T002039, end_date=20230328T002105
+[2023-03-28T00:21:05.842+0000] {standard_task_runner.py:100} ERROR - Failed to execute job 156 for task transform_data (name 'dataframe_years_flag' is not defined; 1343)
+[2023-03-28T00:21:06.031+0000] {local_task_job.py:159} INFO - Task exited with return code 1
+[2023-03-28T00:21:06.113+0000] {taskinstance.py:2582} INFO - 0 downstream tasks scheduled from follow-on schedule check

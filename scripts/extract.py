@@ -25,20 +25,38 @@ class Extract:
 
     def _get_info_countries_data(self):
         response = httpx.get(
-            'https://population.un.org/wpp/Download/Files/1_Indicators (Standard)/CSV_FILES/WPP2022_Demographic_Indicators_Medium.zip')
+            'https://population.un.org/wpp/Download/Files/1_Indicators%20(Standard)/CSV_FILES/WPP2022_Population1JanuaryBySingleAgeSex_Medium_1950-2021.zip')
         zip_file = ZipFile(BytesIO(response.content))
 
-        self.infos_countries = pd.read_csv(zip_file.open('WPP2022_Demographic_Indicators_Medium.csv'))
+        self.infos_countries = pd.read_csv(zip_file.open('WPP2022_Population1JanuaryBySingleAgeSex_Medium_1950-2021.csv'))
 
     def save_data_raw(self):
         now = datetime.now()
         date_time_str = now.strftime("%m-%d-%Y")
 
-        path_file_faostat = date_time_str + '/' + 'faostat'
-        path_file_countries = date_time_str + '/' + 'countries'
+        dict_files_name={
+            'path_file_faostat':date_time_str + '/' + 'faostat.parquet',
+            'path_file_countries' : date_time_str + '/' + 'countries.parquet',
+            'path_file_flags' : date_time_str + '/' + 'flags.parquet',
+            'path_file_area_codes' : date_time_str + '/' + 'area_codes.parquet',
+            'path_file_item_codes' : date_time_str + '/' + 'item_codes.parquet',
+        }
 
-        self.all_data_faostat.to_csv('gs://data_raw_area_project_agro/' + path_file_faostat+'.csv',storage_options={'token':'/opt/credentials/zoomcamp-374100-a34bc7914122.json'})
-        self.infos_countries.to_csv('gs://data_raw_area_project_agro/' + path_file_countries+'.csv', storage_options={'token':'/opt/credentials/zoomcamp-374100-a34bc7914122.json'})
+        self.infos_countries['Notes'] = self.infos_countries['Notes'].astype('str')
 
-        self.all_data_faostat.to_csv(f'/opt/data/data_raw/all_data_faostat_{date_time_str}.csv')
-        self.infos_countries.to_csv(f'/opt/data/data_raw/infos_countries_{date_time_str}.csv')
+        self.all_data_faostat.to_parquet('gs://data_raw_area_project_agro/' + dict_files_name['path_file_faostat'],storage_options={'token':'/opt/credentials/zoomcamp-374100-a34bc7914122.json'})
+        self.infos_countries.to_parquet('gs://data_raw_area_project_agro/' + dict_files_name['path_file_countries'], storage_options={'token':'/opt/credentials/zoomcamp-374100-a34bc7914122.json'})
+        self.dataset_flags.to_parquet('gs://data_raw_area_project_agro/' + dict_files_name['path_file_flags'],
+                                    storage_options={'token': '/opt/credentials/zoomcamp-374100-a34bc7914122.json'})
+        self.dataset_area_codes.to_parquet('gs://data_raw_area_project_agro/' + dict_files_name['path_file_area_codes'],
+                                    storage_options={'token': '/opt/credentials/zoomcamp-374100-a34bc7914122.json'})
+        self.dataset_item_codes.to_parquet('gs://data_raw_area_project_agro/' + dict_files_name['path_file_item_codes'],
+                                    storage_options={'token': '/opt/credentials/zoomcamp-374100-a34bc7914122.json'})
+
+        # self.all_data_faostat.to_parquet(f'/opt/data/data_raw/'+dict_files_name['path_file_faostat'])
+        # #self.infos_countries.to_parquet(f'/opt/data/data_raw/'+dict_files_name['path_file_countries'])
+        # self.dataset_area_codes.to_parquet(f'/opt/data/data_raw/'+dict_files_name['path_file_area_codes'])
+        # self.dataset_item_codes.to_parquet(f'/opt/data/data_raw/'+dict_files_name['path_file_item_codes'])
+        # self.dataset_flags.to_parquet(f'/opt/data/data_raw/'+dict_files_name['path_file_flags'])
+
+        return dict_files_name
