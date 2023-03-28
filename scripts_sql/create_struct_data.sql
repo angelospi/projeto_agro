@@ -25,7 +25,6 @@ CREATE TABLE project_agro.Population (
 	id int64 NOT NULL ,
 	id_country int64 NOT NULL ,
 	year int64 NOT NULL ,
-	Info string  ,
 	value float64 NOT NULL ,
 	footnotes string  ,
 	source string
