@@ -22,4 +22,7 @@ repos:
             [pandas,httpx,apache-airflow]
 
         args:
-            - --fail-under=7
+            - --fail-under=8
+            - --disable=R1731
+            - --disable=R1732
+            - --disable=C0301
