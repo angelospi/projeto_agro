@@ -53,10 +53,5 @@ class Extract:
         self.dataset_item_codes.to_parquet('gs://data_raw_area_project_agro/' + dict_files_name['path_file_item_codes'],
                                     storage_options={'token': '/opt/credentials/zoomcamp-374100-a34bc7914122.json'})
 
-        # self.all_data_faostat.to_parquet(f'/opt/data/data_raw/'+dict_files_name['path_file_faostat'])
-        # #self.infos_countries.to_parquet(f'/opt/data/data_raw/'+dict_files_name['path_file_countries'])
-        # self.dataset_area_codes.to_parquet(f'/opt/data/data_raw/'+dict_files_name['path_file_area_codes'])
-        # self.dataset_item_codes.to_parquet(f'/opt/data/data_raw/'+dict_files_name['path_file_item_codes'])
-        # self.dataset_flags.to_parquet(f'/opt/data/data_raw/'+dict_files_name['path_file_flags'])
 
         return dict_files_name
