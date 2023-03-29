@@ -1,10 +1,15 @@
-from datetime import datetime
-
+"""Module contents scripts for transform and filter data."""
 import pandas as pd
 
 
 class Transform:
+    """
+    Stage transforming data
+    """
+
     def __init__(self, dict_files_name):
+        self.dataset_item_codes = None
+        self.dataset_area_codes = None
         self.infos_countries = None
         self.dataframe_years_flag = None
         self.all_data_faostat = None
@@ -201,9 +206,9 @@ class Transform:
             self.all_data_faostat, self.dataset_flags, how="left", on="Flag"
         )
 
-    def send_data_to_staging(self):
+    def rename_columns(self):
         """
-        Send data with selected features to google storage bucket
+        Select columns and rename for DW
         """
         self.all_data_faostat = self.all_data_faostat[
             [
@@ -218,55 +223,86 @@ class Transform:
                 "Element",
             ]
         ]
+        self.all_data_faostat.rename(
+            columns={
+                "Year": "year",
+                "Value": "value",
+                "Unit": "unit",
+                "Flag": "flag",
+                "Description": "description_flag",
+                "Item Code": "code_item",
+                "Area Code (M49)": "code_country",
+                "Element": "name_element",
+            },
+            inplace=True,
+        )
+
         self.infos_countries = self.infos_countries[
             [
                 "id",
                 "Notes",
                 "LocID",
-                "LocTypeID",
-                "LocTypeName",
-                "Location",
                 "Time",
                 "PopTotal",
             ]
         ]
+        self.infos_countries.rename(
+            columns={
+                "id": "id",
+                "Notes": "footnotes",
+                "LocID": "id_country",
+                "Time": "year",
+                "PopTotal": "value",
+            },
+            inplace=True,
+        )
+
         self.dataset_area_codes = self.dataset_area_codes[["M49 Code", "Area"]]
+        self.dataset_area_codes.rename(
+            columns={
+                "M49 Code": "id",
+                "Area": "name",
+            },
+            inplace=True,
+        )
+
         self.dataset_item_codes = self.dataset_item_codes[["Item Code", "Item"]]
+        self.dataset_item_codes.rename(
+            columns={
+                "Item Code": "id",
+                "Item": "name",
+            },
+            inplace=True,
+        )
 
-        now = datetime.now()
-        date_time_str = now.strftime("%m-%d-%Y")
-
-        dict_files_name = {
-            "path_file_faostat": date_time_str + "/" + "faostat.parquet",
-            "path_file_countries": date_time_str + "/" + "infos_countries.parquet",
-            "path_file_area_codes": date_time_str + "/" + "area_codes.parquet",
-            "path_file_item_codes": date_time_str + "/" + "item_codes.parquet",
-        }
-
+    def send_data_to_staging(self):
+        """
+        Send data with selected features to google storage bucket
+        """
         self.all_data_faostat.to_parquet(
             "gs://data_staging_area_project_agro/"
-            + dict_files_name["path_file_faostat"],
+            + self.dict_files_name["path_file_faostat"],
             storage_options={
                 "token": "/opt/credentials/zoomcamp-374100-a34bc7914122.json"
             },
         )
         self.infos_countries.to_parquet(
             "gs://data_staging_area_project_agro/"
-            + dict_files_name["path_file_countries"],
+            + self.dict_files_name["path_file_countries"],
             storage_options={
                 "token": "/opt/credentials/zoomcamp-374100-a34bc7914122.json"
             },
         )
         self.dataset_area_codes.to_parquet(
             "gs://data_staging_area_project_agro/"
-            + dict_files_name["path_file_area_codes"],
+            + self.dict_files_name["path_file_area_codes"],
             storage_options={
                 "token": "/opt/credentials/zoomcamp-374100-a34bc7914122.json"
             },
         )
         self.dataset_item_codes.to_parquet(
             "gs://data_staging_area_project_agro/"
-            + dict_files_name["path_file_item_codes"],
+            + self.dict_files_name["path_file_item_codes"],
             storage_options={
                 "token": "/opt/credentials/zoomcamp-374100-a34bc7914122.json"
             },

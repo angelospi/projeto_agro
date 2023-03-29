@@ -1,3 +1,4 @@
+"""Module contents scripts for extract data from API."""
 from datetime import datetime
 from io import BytesIO
 from zipfile import ZipFile
