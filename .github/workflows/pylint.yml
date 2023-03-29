@@ -23,4 +23,4 @@ jobs:
         pip install apache-airflow
     - name: Analysing the code with pylint
       run: |
-        pylint $(git ls-files '*.py') --fail-under=8 --disable=R1731 --disable=R1732 --disable=C0301
+        pylint $(git ls-files '*.py') --fail-under=8 --disable=R1731 --disable=R1732 --disable=C0301 --disable=C0413

@@ -9,9 +9,10 @@ from airflow import DAG
 current_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(current_dir, "../../"))
 from scripts.extract import Extract
+from scripts.landing import Landing
 from scripts.transform import Transform
 
-dag = DAG(dag_id="projeto_agro", start_date=datetime(2023, 1, 13))
+dag = DAG(dag_id="projeto_agro", start_date=datetime(2023, 3, 29))
 
 
 def extract(**kwargs):
@@ -38,11 +39,28 @@ def transform(**kwargs):
     transform_class.transform_columns()
     transform_class.clean_dataset()
     transform_class.merge_dataframes()
+    transform_class.rename_columns()
     transform_class.send_data_to_staging()
+
+    # Pass dictionary with files names to next stage
+    kwargs["ti"].xcom_push(key="dict_files_name", value=dict_files_name)
+
+
+def landing(**kwargs):
+    """
+    Stage landing data in DW
+    """
+    dict_files_name = kwargs["ti"].xcom_pull(
+        key="dict_files_name", task_ids="transform_data"
+    )
+
+    landing_class = Landing(dict_files_name)
+    landing_class.insert_in_bq()
 
 
 extract = PythonOperator(task_id="extract_data", python_callable=extract, dag=dag)
 transform = PythonOperator(task_id="transform_data", python_callable=transform, dag=dag)
+landing = PythonOperator(task_id="landing_data", python_callable=landing, dag=dag)
 
 
-extract >> transform
+extract >> transform >> landing

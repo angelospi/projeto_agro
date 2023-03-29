@@ -24,3 +24,4 @@ pandas==1.5.2
 pyarrow==6.0.0
 fsspec==2023.3.0
 gcsfs==2023.3.0
+pandas-gbq==0.19.1
