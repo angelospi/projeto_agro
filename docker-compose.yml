@@ -47,3 +47,14 @@ services:
         - ./credentials:/opt/credentials
       links:
         - postgres
+
+  metabase:
+    image: metabase/metabase
+    environment:
+      - MB_DB_FILE=/metabase.db
+      - MUID=$UID
+      - MGID=$GID
+    volumes:
+      - ./metabase:/metabase.db
+    ports:
+        - 3000:3000
