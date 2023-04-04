@@ -12,7 +12,7 @@ from scripts.extract import Extract
 from scripts.landing import Landing
 from scripts.transform import Transform
 
-dag = DAG(dag_id="projeto_agro", start_date=datetime(2023, 3, 29))
+dag = DAG(dag_id="projeto_agro", start_date=datetime(2023, 3, 29), schedule=None)
 
 
 def extract(**kwargs):

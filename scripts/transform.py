@@ -195,6 +195,47 @@ class Transform:
             self.infos_countries["LocTypeID"] == 4
         ]
 
+        infos_countries_without_group = pd.DataFrame(
+            columns=[
+                "id",
+                "Notes",
+                "LocID",
+                "LocTypeID",
+                "LocTypeName",
+                "Location",
+                "Time",
+                "PopTotal",
+            ]
+        )
+        ids = list(self.infos_countries["id"].unique())
+
+        # Sum population total with all ages
+        sum_pop_total = pd.DataFrame(
+            self.infos_countries.groupby("id", as_index=False)["PopTotal"].sum()
+        )
+
+        for _id in ids:
+            line_infos_countries = self.infos_countries[
+                self.infos_countries["id"] == _id
+            ].iloc[0]
+            pop_total = sum_pop_total[sum_pop_total["id"] == _id]["PopTotal"].values[0]
+
+            line_dict = {
+                "id": _id,
+                "Notes": line_infos_countries["Notes"],
+                "LocID": line_infos_countries["LocID"],
+                "LocTypeID": line_infos_countries["LocTypeID"],
+                "Location": line_infos_countries["Location"],
+                "Time": line_infos_countries["Time"],
+                "PopTotal": pop_total,
+            }
+
+            infos_countries_without_group = infos_countries_without_group.append(
+                line_dict, ignore_index=True
+            )
+
+        self.infos_countries = infos_countries_without_group
+
     def merge_dataframes(self):
         """
         Merge dataframes
