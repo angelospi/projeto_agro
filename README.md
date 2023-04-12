@@ -37,7 +37,7 @@
 ## Modelagem banco de dados (Data Warehouse)
 Para realizar a modelagem de dados foi utilizado o aplicativo DbSchema. O banco modelado encontra-se abaixo:
 
-![Banco de dados modelado](modelagem_dados.png)
+![Banco de dados modelado](images/modelagem_dados.png)
 
 
 
@@ -53,4 +53,18 @@ Para análise desses dados foi utilizado a ferramenta *Metabase*.
 
 Todo esse fluxo de desenvolvimento está representado pelo diagrama abaixo.
 
-![Arquitetura do projeto](diagram_projeto_agro.png)
+![Arquitetura do projeto](images/diagram_projeto_agro.png)
+
+## Dashboards
+Os dados mostrados através de gráficos podem ser visto dentro das dashboards montadas utilizando a ferramenta metabase.
+Para acessar o metabase basta subir o docker-compose que já iniciará serviço. Após, acesse a url "localhost:3000" e quando solicitado
+login insira como email "angelo.spinardi12@hotmail.com" e senha "b?RdvP_aJ2NbP4". Lá dentro se encontra as pastas "Análises Brasil"
+ e "Análises mundo".
+
+Alguns gráficos gerados pelo metabase para análise do Brasil foram sobre as 20 commodities mais produzidas no Brasil em toneladas no ano de 2021
+e também a relação da quantidade colhida em hg por alqueire das commodities mais colhidas no Brasil, Cana de açucar e Soja.
+Outras análises podem ser visualizadas na dashboard acessando "localhost:3000/dashboard/2-dashboard-brazil".
+
+![Production](images/production_tonnes.png)
+
+![Relation](images/relation_yield.png)
