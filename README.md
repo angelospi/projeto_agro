@@ -58,7 +58,7 @@ Todo esse fluxo de desenvolvimento está representado pelo diagrama abaixo.
 ## Dashboards
 Os dados mostrados através de gráficos podem ser visto dentro das dashboards montadas utilizando a ferramenta metabase.
 Para acessar o metabase basta subir o docker-compose que já iniciará serviço. Após, acesse a url "localhost:3000" e quando solicitado
-login insira como email "angelo.spinardi12@hotmail.com" e senha "b?RdvP_aJ2NbP4". Lá dentro se encontra as pastas "Análises Brasil"
+login insira como email "angelo.spinardi12@gmail.com" e senha "b?RdvP_aJ2NbP4". Lá dentro se encontra as pastas "Análises Brasil"
  e "Análises mundo".
 
 Alguns gráficos gerados pelo metabase para análise do Brasil foram sobre as 20 commodities mais produzidas no Brasil em toneladas no ano de 2021
