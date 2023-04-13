@@ -70,32 +70,35 @@ class Extract:
         self.infos_countries["Notes"] = self.infos_countries["Notes"].astype("str")
 
         self.all_data_faostat.to_parquet(
-            "gs://data_raw_area_project_agro/" + dict_files_name["path_file_faostat"],
+            "gs://data_lake_zoomcamp-374100/data_raw/"
+            + dict_files_name["path_file_faostat"],
             storage_options={
                 "token": "/opt/credentials/zoomcamp-374100-a34bc7914122.json"
             },
         )
         self.infos_countries.to_parquet(
-            "gs://data_raw_area_project_agro/" + dict_files_name["path_file_countries"],
+            "gs://data_lake_zoomcamp-374100/data_raw/"
+            + dict_files_name["path_file_countries"],
             storage_options={
                 "token": "/opt/credentials/zoomcamp-374100-a34bc7914122.json"
             },
         )
         self.dataset_flags.to_parquet(
-            "gs://data_raw_area_project_agro/" + dict_files_name["path_file_flags"],
+            "gs://data_lake_zoomcamp-374100/data_raw/"
+            + dict_files_name["path_file_flags"],
             storage_options={
                 "token": "/opt/credentials/zoomcamp-374100-a34bc7914122.json"
             },
         )
         self.dataset_area_codes.to_parquet(
-            "gs://data_raw_area_project_agro/"
+            "gs://data_lake_zoomcamp-374100/data_raw/"
             + dict_files_name["path_file_area_codes"],
             storage_options={
                 "token": "/opt/credentials/zoomcamp-374100-a34bc7914122.json"
             },
         )
         self.dataset_item_codes.to_parquet(
-            "gs://data_raw_area_project_agro/"
+            "gs://data_lake_zoomcamp-374100/data_raw/"
             + dict_files_name["path_file_item_codes"],
             storage_options={
                 "token": "/opt/credentials/zoomcamp-374100-a34bc7914122.json"
