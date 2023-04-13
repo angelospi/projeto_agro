@@ -18,7 +18,7 @@ class Landing:
         """
 
         self.all_data_faostat = pd.read_parquet(
-            "gs://data_staging_area_project_agro/"
+            "gs://data_lake_zoomcamp-374100/data_staging/"
             + self.dict_files_name["path_file_faostat"],
             storage_options={
                 "token": "/opt/credentials/zoomcamp-374100-a34bc7914122.json"
@@ -38,7 +38,7 @@ class Landing:
         )
 
         self.infos_countries = pd.read_parquet(
-            "gs://data_staging_area_project_agro/"
+            "gs://data_lake_zoomcamp-374100/data_staging/"
             + self.dict_files_name["path_file_countries"],
             storage_options={
                 "token": "/opt/credentials/zoomcamp-374100-a34bc7914122.json"
@@ -54,7 +54,7 @@ class Landing:
         )
 
         self.dataset_area_codes = pd.read_parquet(
-            "gs://data_staging_area_project_agro/"
+            "gs://data_lake_zoomcamp-374100/data_staging/"
             + self.dict_files_name["path_file_area_codes"],
             storage_options={
                 "token": "/opt/credentials/zoomcamp-374100-a34bc7914122.json"
@@ -62,7 +62,7 @@ class Landing:
         ).astype({"id": "int64", "name": "str"})
 
         self.dataset_item_codes = pd.read_parquet(
-            "gs://data_staging_area_project_agro/"
+            "gs://data_lake_zoomcamp-374100/data_staging/"
             + self.dict_files_name["path_file_item_codes"],
             storage_options={
                 "token": "/opt/credentials/zoomcamp-374100-a34bc7914122.json"
@@ -80,27 +80,27 @@ class Landing:
         self.all_data_faostat.to_gbq(
             destination_table="project_agro.Elements",
             project_id="zoomcamp-374100",
-            if_exists="append",
+            if_exists="replace",
             credentials=credentials,
         )
 
         self.infos_countries.to_gbq(
             destination_table="project_agro.Population",
             project_id="zoomcamp-374100",
-            if_exists="append",
+            if_exists="replace",
             credentials=credentials,
         )
 
         self.dataset_area_codes.to_gbq(
             destination_table="project_agro.Countries",
             project_id="zoomcamp-374100",
-            if_exists="append",
+            if_exists="replace",
             credentials=credentials,
         )
 
         self.dataset_item_codes.to_gbq(
             destination_table="project_agro.Item",
             project_id="zoomcamp-374100",
-            if_exists="append",
+            if_exists="replace",
             credentials=credentials,
         )

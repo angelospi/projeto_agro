@@ -18,6 +18,7 @@ provider "google" {
 resource "google_bigquery_dataset" "dataset" {
   dataset_id                  = "project_agro"
   location                    = var.region
+  delete_contents_on_destroy  = true
 
   labels = {
     env = "default"
@@ -27,5 +28,6 @@ resource "google_bigquery_dataset" "dataset" {
 resource "google_storage_bucket" "data_lake" {
   name          = "data_lake_${var.project_id}"
   location      = var.region
+  force_destroy = true
 
 }
