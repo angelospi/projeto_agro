@@ -3,3 +3,5 @@ credentials
 .ipynb_checkpoints
 airflow/metadata_airflow
 airflow/logs
+images/relacao_colheita.png
+script_pyspark.py
