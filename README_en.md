@@ -35,7 +35,7 @@
 - Footnotes: Observations
 - Source: Data source
 
-## Modelagem banco de dados (Data Warehouse)
+## Data Modeling (Data Warehouse)
 To perform the data modeling, the DbSchema application was used. The modeled database is shown below:
 
 ![Banco de dados modelado](images/modelagem_dados.png)
